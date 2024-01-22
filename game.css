@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    background-color: #6c757d;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+
+h1{
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: calc(100vh - 4rem)
+}
+
+.matrix{
+    border: 1px solid black;
+    display: grid;
+    width: 60%;
+    margin: 0 auto;
+    grid-template-columns: repeat(5, 1fr);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.matrix > div{
+    text-align: center;
+    border: 1px solid black;
+
+}
+
+
+
+.words-to-find{
+    font-size: 1.5rem;
+    text-align: center;
+    
+}
+
+.words{
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 60%;
+    margin: 0 auto;
+
+}
+
+.words p{
+    margin: 1.5rem;
+}
+
+
+@media screen and (min-width: 992px ) {
+    .matrix {
+        width: 600px;
+        height: 400px;
+    }
+    
+}
+
