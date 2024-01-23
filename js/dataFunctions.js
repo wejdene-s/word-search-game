@@ -1,10 +1,10 @@
 export async function GenerateRelatedWords(selectedField) {
     const response = await fetch(`https://api.datamuse.com/words?ml=${selectedField}`);
     const words = await response.json();
-    displayWords(words);
+    getWords(words);
 } 
 
-export function displayWords (words) {
+export function getWords (words) {
     let arr = words.filter(element => {
         return element.word.indexOf(" ") === -1 ;
     });
