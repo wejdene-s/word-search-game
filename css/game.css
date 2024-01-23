@@ -40,6 +40,11 @@ h1{
 
 }
 
+.matrix div:hover{
+    cursor:default;
+}
+
+
 
 
 .words-to-find{
