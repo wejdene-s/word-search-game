@@ -24,26 +24,26 @@ h1{
     height: calc(100vh - 4rem)
 }
 
-.matrix{
+#matrix{
     border: 1px solid black;
     display: grid;
     width: 60%;
     margin: 0 auto;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows : repeat(10, 1fr);
     font-size: 1.5rem;
     text-align: center;
 }
 
-.matrix > div{
+#matrix > div{
     text-align: center;
     border: 1px solid black;
 
 }
 
-.matrix div:hover{
+#matrix div:hover{
     cursor:default;
 }
-
 
 
 
@@ -67,9 +67,13 @@ h1{
     margin: 1.5rem;
 }
 
+.highlight {
+    color: #999;
+}
+
 
 @media screen and (min-width: 992px ) {
-    .matrix {
+    #matrix {
         width: 600px;
         height: 400px;
     }
