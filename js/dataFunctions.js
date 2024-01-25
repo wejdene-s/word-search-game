@@ -1,5 +1,7 @@
+
 export async function GenerateRelatedWords(selectedField) {
     const response = await fetch(`https://api.datamuse.com/words?ml=${selectedField}`);
+    console.log(response.status)
     const words = await response.json();
     getWords(words);
 } 
@@ -20,5 +22,6 @@ export const randomWords = async(arrOfWords) =>{
         }  
     }
     localStorage.setItem("arrOfRandomWords", JSON.stringify(arrOfRandomWords));
-
 }
+
+

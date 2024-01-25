@@ -9,8 +9,6 @@ const initApp = () => {
         })
     })
 
-
-
 }
 
 document.addEventListener("DOMContentLoaded", initApp );
@@ -31,40 +29,50 @@ const createElem = (type, parent, content) => {
     const newElem = document.createElement(type);
     newElem.textContent = content;
     newElem.tabIndex = "0";
-    if ( type == "div") newElem.setAttribute("class", "letter"); parent.append(newElem);
+    if ( type == "div"){
+        newElem.setAttribute("class", "letter"); 
+       /*  return newElem; */
+    }else parent.append(newElem);
 
 }
 
 const displayLetters = (arrayOfWords) => {
-    const matrix = document.getElementById("matrix");
+    /* const matrix = document.getElementById("matrix"); */
     let totalLength = 0;
     let arr = [];
     JSON.parse(arrayOfWords).forEach( element =>{
+        let subArray = [];
         totalLength += element.length;
-        arr.push(element.split(""))
         for (let c of element){
-            createDiv("div", matrix, c);
+            subArray.push(c);
+            /* createElem("div", matrix, c); */
         }
-        
+        arr.push(subArray);
     })
-    console.log(arr);
-    while (totalLength !== 100){
-        const randomWord = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-        if(arr.indexOf(randomWord) !== -1){
-            createDiv("div", matrix, );
-            totalLength++;
-        }
-    }
-    console.log(totalLength);
 
+    const finalArray = generatePaddingLetters(totalLength, arr);
+    placeLetters(finalArray);
     
+    //i need to randomly put words in a correct place and then fill the rest with padding ramdom letters
 }
 
-const createDiv = (type, parent, content) => {
-    createElem(type, parent, content);
+const placeLetters = (finalArray) => {
+    console.log(finalArray);
 
 }
 
+const generatePaddingLetters = (length, arr) => {
+    while (length !== 100){
+        const randomLetter = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+        /* createElem("div", matrix, randomLetter); */
+        arr.push(randomLetter);
+        length++;
+    }
+    return arr;
+}
+
+
+ 
 
 
 
