@@ -1,3 +1,4 @@
+
 const initApp = () => {
 
     const arrayOfWords = localStorage.getItem("arrOfRandomWords");
@@ -6,17 +7,83 @@ const initApp = () => {
 
 
     const letters = document.querySelectorAll(".letter");
-
     letters.forEach(letter =>{
-        letter.addEventListener("click", function() {
-            letter.classList.toggle("highlight");
-            console.log(letter.textContent);
-
-        })
+        letter.addEventListener("click", checkMarkedWords) 
     })
 
-    
 
+
+    
+}
+
+let word = "";
+
+const checkMarkedWords = (event) => {
+    const arrayOfWords = localStorage.getItem("arrOfRandomWords");
+    if (!(event.target.classList.contains("highlight"))){
+        event.target.classList.add("highlight");
+        word += event.target.textContent ;
+        console.log(word);
+
+    }
+    JSON.parse(arrayOfWords).forEach(str => {
+        if(areAnagrams(word, str)){
+            verifyWord(str);
+            word = "";
+        }
+
+    })
+
+
+}
+let nb =0;
+const verifyWord = (str) => {
+    const word = document.getElementById(str);
+    word.style.textDecoration = 'line-through';
+    nb ++;
+    if (nb === 5){
+        setTimeout(() => {
+            const matrix = document.getElementById("matrix");
+            const wordsSection = document.getElementById("words-section");
+            const header = document.querySelector("h1");
+            matrix.style.display = 'none';
+            wordsSection.style.display = 'none';
+            header.style.display = 'none';
+
+            const message = document.createElement('h1');
+
+            message.textContent = ' Congratulations 🏆🔥'
+            const content = document.querySelector('.content');
+            content.append(message);
+        }, 3000);
+        
+
+    }
+
+
+}
+
+const areAnagrams = (word,str) => {
+
+    if (str.length !== word.length) return false;
+    const frequencyMap1 = {};
+    const frequencyMap2 = {};
+
+    for (const char of str){
+        frequencyMap1[char] = (frequencyMap1[char] || 0) + 1;
+    }
+
+    for (const char of word){
+        frequencyMap2[char] = (frequencyMap2[char] || 0) + 1;
+    }
+
+    for (const char in frequencyMap1) {
+        if (frequencyMap1[char] !== frequencyMap2[char]) {
+            return false;
+        }
+    }
+    return true;
+    
 }
 
 document.addEventListener("DOMContentLoaded", initApp );
@@ -37,6 +104,7 @@ const createElement =  (parent,type, content) => {
     const newElem = document.createElement(type);
     newElem.textContent = content;
     newElem.tabIndex = "0";
+    if (type === "p") newElem.setAttribute('id', content);
     if (type === "div") newElem.classList.add("letter"); 
     parent.append(newElem);
 
