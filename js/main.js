@@ -37,29 +37,40 @@ const checkMarkedWords = (event) => {
 
 }
 let nb =0;
+
 const verifyWord = (str) => {
     const word = document.getElementById(str);
     word.style.textDecoration = 'line-through';
+
     nb ++;
     if (nb === 5){
-        setTimeout(() => {
-            const matrix = document.getElementById("matrix");
-            const wordsSection = document.getElementById("words-section");
-            const header = document.querySelector("h1");
-            matrix.style.display = 'none';
-            wordsSection.style.display = 'none';
-            header.style.display = 'none';
-
-            const message = document.createElement('h1');
-
-            message.textContent = ' Congratulations 🏆🔥'
-            const content = document.querySelector('.content');
-            content.append(message);
-        }, 3000);
-        
-
+        setTimeout(displayMessage, 3000);
     }
+}
 
+const displayMessage = () => {
+    const matrix = document.getElementById("matrix");
+    const wordsSection = document.getElementById("words-section");
+    const header = document.querySelector("h1");
+
+    matrix.style.display = 'none';
+    wordsSection.style.display = 'none';
+    header.style.display = 'none';
+
+    const message = document.createElement('h1');
+
+    message.textContent = ' Congratulations 🏆🔥'
+    const content = document.querySelector('.content');
+    content.append(message);
+
+    //playAgain button 
+    const button = document.createElement("button");
+    button.setAttribute("id", "play-again");
+    const link = document.createElement("a");
+    link.setAttribute("href", "index.html");
+    link.textContent = "Play Again";
+    button.append(link);
+    content.append(button);
 
 }
 

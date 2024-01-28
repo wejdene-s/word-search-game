@@ -83,8 +83,41 @@ h1{
 
 
 .content h1{
-    margin-bottom: 10rem;
     font-size: 4rem;
-    
+
 }
 
+
+a{
+    text-decoration: none;
+}
+
+#play-again{
+    border: 1px solid black;
+    width: 10rem;
+    height: 3rem;
+    margin: 0 auto 10rem auto;
+    font-family: inherit;
+    font-size: 1.5rem;
+    background: linear-gradient(-180deg, #929EAD, 0%, #4e555b  98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);
+    background-blend-mode: screen;
+    border-style: hidden;
+    border-radius: 5px;
+    
+
+}
+
+#play-again:hover{
+    /* animation: animateButton 0.4s  infinite ; */
+    transform: scale(1.1);
+    font-weight: bold;
+    transition: transform, font-weight 0.2s ease-in-out ;
+}
+
+a:visited{
+    color: black;
+}
+
+#play-again:hover{
+    cursor: pointer;
+}
