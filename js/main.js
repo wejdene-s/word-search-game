@@ -31,8 +31,6 @@ const checkMarkedWords = (event) => {
     JSON.parse(arrayOfWords).forEach(str => {
         //check if the selected exists and is in a valid way (horizontally from right to left or vertically from top to bottom )
         if(areAnagrams(selectedWord, str) && isValid(selectedWordsIndex)){
-            console.log(selectedWordsIndex);
-            console.log(selectedWord);
             verifyWord(str);
             selectedWord = "";
             selectedWordsIndex = [];
