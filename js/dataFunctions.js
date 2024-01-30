@@ -5,7 +5,7 @@ export async function GenerateRelatedWords(selectedField) {
     getWords(words);
 } 
 
-export function getWords (words) {
+export function getWords (words) {//return only words that don't contain space 
     let arr = words.filter(element => {
         return element.word.indexOf(" ") === -1 ;
     });
@@ -13,6 +13,8 @@ export function getWords (words) {
 }
 
 export const randomWords = async(arrOfWords) =>{
+    //randomly choosing unique five words
+    //limiting their length to 8 so they are easy to place in a 10*10 martix  
     let arrOfRandomWords = [];
     while (arrOfRandomWords.length <5){
         let i = Math.floor(Math.random() * arrOfWords.length) ;

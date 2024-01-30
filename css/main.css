@@ -9,7 +9,7 @@
 :root{
     --BG-COLOR: #6c757d;
     --SHADOW-COLOR: #212529;
-    --SUBMIT-COLOR: #4f5d75;
+    --BUTTON-COLOR: #4f5d75;
 }
 
 select, button{
@@ -81,7 +81,7 @@ button{
     margin-top: 3rem;
     width: 10rem;
     height: 3rem;
-    background-color: #4f5d75;
+    background-color: var(--BUTTON-COLOR);
     border: 2px solid var(--SHADOW-COLOR);
     font-size: 1.5rem;
    

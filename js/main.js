@@ -12,32 +12,51 @@ const initApp = () => {
     })
 
 
-
-    
 }
+document.addEventListener("DOMContentLoaded", initApp );
 
-let word = "";
 
+let selectedWord = "";
+let selectedWordsIndex = [];
 const checkMarkedWords = (event) => {
     const arrayOfWords = localStorage.getItem("arrOfRandomWords");
+    
     if (!(event.target.classList.contains("highlight"))){
         event.target.classList.add("highlight");
-        word += event.target.textContent ;
-        console.log(word);
-
+        selectedWord += event.target.textContent ;
+        const matrix = document.getElementById("matrix");
+        selectedWordsIndex.push(Array.from(matrix.children).indexOf(event.target))
+        
     }
     JSON.parse(arrayOfWords).forEach(str => {
-        if(areAnagrams(word, str)){
+        //check if the selected exists and is in a valid way (horizontally from right to left or vertically from top to bottom )
+        if(areAnagrams(selectedWord, str) && isValid(selectedWordsIndex)){
+            console.log(selectedWordsIndex);
+            console.log(selectedWord);
             verifyWord(str);
-            word = "";
+            selectedWord = "";
+            selectedWordsIndex = [];
+            
         }
 
     })
 
+}
+const isValid = (arr) => {
+    let i = 2;
+    let difference = arr[1] - arr[0];
+    let result = true;
+    while (result && i<arr.length ){
+        if ( arr[i] - arr[i -1] !== difference){
+            result = false;
+        } 
+        i++;
+    }
+    return result;
 
 }
-let nb =0;
 
+let nb = 0;
 const verifyWord = (str) => {
     const word = document.getElementById(str);
     word.style.textDecoration = 'line-through';
@@ -59,7 +78,7 @@ const displayMessage = () => {
 
     const message = document.createElement('h1');
 
-    message.textContent = ' Congratulations 🏆🔥'
+    message.textContent = ' WELL DONE! 🏆'
     const content = document.querySelector('.content');
     content.append(message);
 
@@ -97,7 +116,6 @@ const areAnagrams = (word,str) => {
     
 }
 
-document.addEventListener("DOMContentLoaded", initApp );
 
 
 const displayWords = (arrayOfWords) =>{
@@ -114,7 +132,6 @@ const displayWords = (arrayOfWords) =>{
 const createElement =  (parent,type, content) => {
     const newElem = document.createElement(type);
     newElem.textContent = content;
-    newElem.tabIndex = "0";
     if (type === "p") newElem.setAttribute('id', content);
     if (type === "div") newElem.classList.add("letter"); 
     parent.append(newElem);
@@ -181,22 +198,23 @@ const isDivEmpty = (randomPlace) => {
 }
 
 const placeTheWord = (element, place) => {
-    let placeLength = (place + element.length) - 1;
+
+    let lastPosition = (place + element.length) - 1;
     let currentPosition = place;
 
-    if (placeLength <= mostRight(place) && areDivsEmpty(place, placeLength)) {
+    if (lastPosition <= mostRight(currentPosition) && areDivsEmpty(currentPosition, lastPosition)) {
         element.forEach(elem => {
             addTextContent(currentPosition, elem)
             currentPosition++;
-            /* console.log(correspondantDiv); */
+            
         });
         
         return true;
-    }else if ((place + (10 * (element.length - 1)) <= 100) && areDivsEmpty(place,(place + (10 * (element.length - 1) ) ))) {
+    }else if ((currentPosition + (10 * (lastPosition - 1)) <= 100) && areDivsEmpty(currentPosition,(currentPosition + (10 * (lastPosition - 1) ) ))) {
         element.forEach(elem => {
             addTextContent(currentPosition, elem);
             currentPosition+= 10;
-            /* console.log(correspondantDiv); */
+
         });
         return true;
 
@@ -216,8 +234,6 @@ const areDivsEmpty = (firstDiv, lastDiv) => {
     }
     return i > lastDiv ; 
 }
-
-
 
 
 const mostRight = (number) =>{
