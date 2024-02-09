@@ -13,7 +13,6 @@ const getFieldSelected =  async() =>{
     const select = document.querySelector("select");
     const  selectedIndex = select.selectedIndex;
     const selectedOption = select.options[selectedIndex];
-    console.log(selectedOption.text);
     await GenerateRelatedWords(selectedOption.text);
 
 }
